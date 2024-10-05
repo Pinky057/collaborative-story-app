@@ -1,33 +1,55 @@
 import React, { useState } from 'react';
-import FileUploader from '../components/FileUploader';
 
 const Upload = () => {
+  const [file, setFile] = useState(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [uploading, setUploading] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here, you'll combine the text content and the file upload response from Pinata
-    console.log('Story title:', title);
-    console.log('Story content:', content);
-    // Add logic to send this data to the backend
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle upload logic here
+    setUploading(true);
+    console.log("Story title:", title);
+    console.log("Story content:", content);
+    console.log("File to upload:", file);
+    setUploading(false);
   };
 
   return (
-      <div className="upload-page">
+      <div>
         <h2>Contribute to the Story</h2>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>Title:</label>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-          </div>
-          <div>
-            <label>Content:</label>
-            <textarea value={content} onChange={(e) => setContent(e.target.value)} required />
-          </div>
-          <FileUploader />
-          <button type="submit">Submit</button>
+          <label>
+            Title:
+            <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter title"
+                required
+            />
+          </label>
+          <label>
+            Content:
+            <textarea
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="Write your story"
+                required
+            />
+          </label>
+          <label>
+            File:
+            <input type="file" onChange={handleFileChange} />
+          </label>
+          <input type="submit" value="Submit" />
         </form>
+        {uploading && <p>Uploading...</p>}
       </div>
   );
 };

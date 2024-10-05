@@ -7,8 +7,13 @@ const Home = () => {
     <div className="home">
       <h1>Collaborative Storytelling</h1>
       <p>Join the community to create and contribute to ongoing stories!</p>
-      <Link to="/stories">View Stories</Link>
-      <Link to="/upload">Upload a Contribution</Link>
+        <Link to="/stories" style={{ margin: "10px", padding: "10px", backgroundColor: "#007BFF", color: "white", textDecoration: "none", borderRadius: "5px" }}>
+            View Stories
+        </Link>
+
+        <Link to="/upload" style={{ margin: "10px", padding: "10px", backgroundColor: "#007BFF", color: "white", textDecoration: "none", borderRadius: "5px" }}>
+            Upload a Contribution
+        </Link>
     </div>
   );
 };
